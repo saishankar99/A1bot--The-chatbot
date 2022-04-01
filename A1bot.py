@@ -1,4 +1,8 @@
-from flask
+#This is using if else conditions 
+# I am trying with nltk python but not able to get accurate results
+#I will share that code too once I got accurate results
+# yet to add flask code in this to connect with the html
+from flask import Flask
 import speech_recognition as sr
 import pyttsx3
 import datetime
@@ -17,7 +21,7 @@ engine.setProperty('voice',voices[1].id)
 def speak(text):
     engine.say(text)
     engine.runAndWait()
-def wishMe():
+def greetings():
     hour=datetime.datetime.now().hour
     if hour>=0 and hour<12:
         speak("Hello,Good Morning")
@@ -28,9 +32,9 @@ def wishMe():
     else:
         speak("Hello,Good Evening")
         print("Hello,Good Evening")
-def takeCommand():
+def getinput():
     statement=input()
-    """r=sr.Recognizer()
+    r=sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening....")
         audio=r.listen(source)
@@ -39,21 +43,21 @@ def takeCommand():
             print(f"user said:{statement}\n")
         except Exception as e:
             speak("Pardon me,please say that again")
-            return "None"""
+            return "None"
     return statement
-print("Loading your AI personal assistant G-one")
-speak("Loading your AI personal assistant G-one")
-wishMe()
+print("Loading your AI personal assistant A1bot")
+speak("Loading your AI personal assistant A1bot")
+greetings()
 from cv2 import *
 if __name__=='__main__':
     while True:
         speak("Tell me how can I help you now?")
-        statement=takeCommand().lower()
+        statement=getinput().lower()
         if statement==0:
             continue
         if statement in ["good bye","ok bye","stop"]:
-            speak('your personal assistant G-one is shutting down,Good bye')
-            print('your personal assistant G-one is shutting down,Good bye')
+            speak('your personal assistant A1bot is shutting down,Good bye')
+            print('your personal assistant A1bot is shutting down,Good bye')
             break
         if 'wikipedia' in statement:
             speak('Searching Wikipedia..')
@@ -89,7 +93,7 @@ if __name__=='__main__':
             time.sleep(5)
         elif 'ask' in statement:
             speak('I can answer to computational and geographical questions and what question do you want to ask now')
-            question=takeCommand()
+            question=getinput()
             app_id="329UA6-RU843YYAW7"
             client=wolframalpha.Client('329UA6-RU843YYAW7')
             res=client.query(question)
@@ -97,7 +101,7 @@ if __name__=='__main__':
             speak(answer)
             print(answer)
         elif 'who are you' in statement or 'what can you do' in statement:
-            speak('I am G-one version 1 point 0 your personal assistant. I am programmed to minor tasks like'
+            speak('I am A1bot  your personal assistant. I am programmed to minor tasks like'
                  'opening youtube,google chrome,gmail and stackoverflow, predict time, take a photo,search wikipedia,predict weather'
                  'In different cities, get top headline news from times of india and you can ask me computational or geographical questions too!')
         elif 'who made you' in statement or "who created you" in statement or "who discovered you" in statement:
@@ -110,7 +114,7 @@ if __name__=='__main__':
             api_key="680b68d05d10e3cf91d9e0a976a494fc"
             base_url="https://api.openweathermap.org/data/2.5/weather?"
             speak("what is the city name")
-            city_name=takeCommand()
+            city_name=getinput()
             complete_url=base_url+"appid="+api_key+"&q="+city_name
             response=requests.get(complete_url)
             x=response.json()
